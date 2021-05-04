@@ -15,7 +15,24 @@ vec3 illuminate(vec3 lightPosition) {
     float intensity = 1.0 / dot(wi, wi); // inverse-square law
     vec3 diffuse = kd * max(dot(normalize(wi), normalize(vNormal)), 0.0);
 
-    vec3 specular = vec3(0.0); // Change me!
+    vec3 wo = eye - vPosition;
+    wo = normalize(wo);
+    vec3 r = reflect(-normalize(wi), normalize(vNormal));
+
+    float temp = dot(wo, r);
+    
+    if (temp > 0.0)
+    {
+        temp = pow(temp, shininess);
+    }
+    else
+    {
+        temp = 0.0;
+    }
+    
+    vec3 specular = ks * temp;
+
+    return intensity * (diffuse + specular);
 
     return intensity * (diffuse + specular);
 }
@@ -26,7 +43,7 @@ void main() {
     // We add two lights to the scene. Feel free to change these
     // values, or add more lights at different positions!
     vec3 color = vec3(0.0);
-    color += 40.0 * illuminate(vec3(0.0, 3.0, 9.0));
+    color += 30.0 * illuminate(vec3(5.0, 3.0, 5.0));
     color += 20.0 * illuminate(vec3(0.0, 10.0, 2.0));
 
     // Stylized shading
