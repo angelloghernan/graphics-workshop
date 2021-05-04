@@ -21,13 +21,13 @@ void main() {
     if (mod(2.0 * cell.x + cell.y, 5.0) == floor(seed * 5.0)) {
          color = 1.0 - color;
      }
-    else if (mod(2.0 * cell.x + cell.y, 10.0) == floor(seed * 10.0))
+    else if (mod(cell.x + 3.0 * cell.y, 10.0) == floor(seed * 10.0))
     {
-        color = 0.75 - color;
+        color = seed - color;
     }
 
     // 3. Uncomment these lines to produce interesting colors
-     float c = mod(3.0 * cell.x + 2.0 * cell.y, 7.0) / 7.0;
+     float c = mod(3.0 * seed * cell.x + 2.0 * cell.y, 7.0) / 7.0;
      color = 1.0 - (1.0 - color) * vec3(abs(sin(cell.x)) * c, c * 0.9, abs(cos(cell.y)) * c);
 
     // 4. Uncomment to lighten the colors
