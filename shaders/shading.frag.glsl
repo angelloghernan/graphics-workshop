@@ -40,10 +40,7 @@ vec3 illuminate(vec3 lightPosition) {
     else
     {
         temp = 0.0;
-    }
-
-    //temp = abs(temp);
-    
+    }    
     vec3 specular = ks * temp;
 
     return intensity * (diffuse + specular);
